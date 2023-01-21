@@ -13,7 +13,7 @@ import { observer } from 'mobx-react';
 import { usersStore } from '../../stores/users';
 import { queuesStore } from '../../stores/queues';
 import { User } from '../../types/user';
-import { RootStackParamList } from '../../../App';
+import { RootStackParamList } from '../../Main';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 function CreateQueue({
@@ -23,7 +23,7 @@ function CreateQueue({
   const backgroundColor = isDarkMode ? Colors.darker : Colors.lighter;
 
   const [title, setTitle] = useState<string>('');
-  const [members, setMembers] = useState<User[]>([{ id: 'b', name: 'Baraa' }]);
+  const [members, setMembers] = useState<User[]>([]);
 
   const addMember = (user: User) => {
     setMembers([...members, user]);
@@ -36,7 +36,11 @@ function CreateQueue({
   const handleSave = () => {
     if (!isValidForm()) return;
 
-    queuesStore.addQueue({ id: 'new', title, members });
+    queuesStore.addQueue({
+      title,
+      members,
+      activeMemberId: members[0].id,
+    });
     navigation.navigate('Home');
   };
 
@@ -70,7 +74,7 @@ function CreateQueue({
               ),
             },
           ]}
-          keyExtractor={item => item?.id}
+          keyExtractor={item => item?.id || ''}
           renderItem={({ item }) => (
             <View
               style={{

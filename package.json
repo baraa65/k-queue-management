@@ -11,8 +11,14 @@
     "windows": "react-native run-windows"
   },
   "dependencies": {
+    "@react-native-firebase/app": "^16.5.0",
+    "@react-native-firebase/app-check": "^16.5.0",
+    "@react-native-firebase/firestore": "^16.5.0",
+    "@react-native-firebase/messaging": "^16.5.0",
     "@react-navigation/native": "^6.1.2",
     "@react-navigation/native-stack": "^6.9.8",
+    "firebase": "^9.15.0",
+    "firebase-admin": "^11.5.0",
     "mobx": "^6.7.0",
     "mobx-react": "^7.6.0",
     "react": "18.1.0",
@@ -22,7 +28,8 @@
     "react-native-safe-area-context": "*",
     "react-native-screens": "*",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-windows": "0.70.10"
+    "react-native-windows": "0.70.10",
+    "reactfire": "^4.2.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",

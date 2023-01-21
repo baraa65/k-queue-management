@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { Text, View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { RootStackParamList } from '../../../App';
+import { RootStackParamList } from '../../Main';
 import { authStore } from '../../stores/auth';
 import { queuesStore } from '../../stores/queues';
 import { Queue } from '../../types/queue';
@@ -33,6 +33,7 @@ function QueueDetails({
 
       {queue?.members.map(member => (
         <View
+          key={member.id}
           style={{
             ...(queue.activeMemberId === member.id ? activeStyle : {}),
             padding: 15,

@@ -11,9 +11,9 @@ class AuthStore {
 
   login({ username, password }: { username: string; password: string }) {
     return new Promise((resolve, reject) => {
-      const users = usersStore.getUsers();
-
-      const currentUser = users.find(
+      console.log({ username, password });
+      usersStore.users.forEach(user => console.log(user));
+      const currentUser = usersStore.users.find(
         u => u.username === username && u.password === password,
       );
 

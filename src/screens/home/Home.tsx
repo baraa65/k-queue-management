@@ -8,7 +8,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import { queuesStore } from '../../stores/queues';
 import { observer } from 'mobx-react';
 import { Queue as QueueType } from '../../types/queue';
-import { RootStackParamList } from '../../../App';
+import { RootStackParamList } from '../../Main';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
 const Home = ({

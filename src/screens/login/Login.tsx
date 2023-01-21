@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 import { TextInput } from 'react-native-gesture-handler';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
-import { RootStackParamList } from '../../../App';
+import { RootStackParamList } from '../../Main';
 import { authStore } from '../../stores/auth';
 
 function Login({

@@ -1,32 +1,32 @@
-import { action, makeObservable } from 'mobx';
+import firestore from '@react-native-firebase/firestore';
+import { makeAutoObservable } from 'mobx';
 import { IQueue, Queue } from '../types/queue';
-import { usersStore } from './users';
 
 class QueuesStore {
   queues: Queue[] = [];
 
   constructor() {
-    makeObservable(this, { queues: true, getQueues: action, addQueue: action });
+    makeAutoObservable(this);
   }
 
   getQueue(id: string) {
     return this.queues.find(q => q.id === id) || null;
   }
 
-  getQueues() {
-    this.queues = [
-      new Queue({
-        id: '1',
-        title: 'test',
-        members: usersStore.users,
-        activeMemberId: '1',
-      }),
-      new Queue({ id: '2', title: 'test 2', members: [] }),
-    ];
+  async getQueues() {
+    const queues = await firestore().collection<IQueue>('queues').get();
+
+    this.queues = queues.docs.map(
+      queue => new Queue({ id: queue.id, ...queue.data() }),
+    );
   }
 
-  addQueue(queue: IQueue) {
-    this.queues.push(new Queue(queue));
+  async addQueue(data: IQueue) {
+    const queueRef = await firestore().collection<IQueue>('queues').add(data);
+    const queue = await queueRef.get();
+
+    const queueData = queue.data();
+    if (queueData) this.queues.push(new Queue({ id: queue.id, ...queueData }));
   }
 }
 

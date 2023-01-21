@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { IUser } from './user';
+import firestore from '@react-native-firebase/firestore';
 
 export interface IQueue {
   id?: string;
@@ -51,5 +52,9 @@ export class Queue implements IQueue {
     } else {
       this.activeMemberId = this.members[0].id;
     }
+
+    const data = JSON.parse(JSON.stringify(this));
+    delete data.id;
+    firestore().doc(`queues/${this.id}`).set(data);
   }
 }
